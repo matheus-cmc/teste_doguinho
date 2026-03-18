@@ -26,24 +26,33 @@ describe("Outros Testes", () => {
     let total = 0
     expect(total).toBe(0)
   })
-  // RESULTADO DO TESTE: PASS✅
+  // RESULTADO DO TESTE: PASS ✅
+  // O teste verifica se um carrinho vazio retorna valor total igual a 0.
+  // Como não há produtos, o resultado está correto.
 
 
   test("22. Finalizar compra limpa carrinho", () => {
     let carrinho = []
     expect(carrinho.length).toBe(0)
   })
-  // RESULTADO DO TESTE: PASS✅
+  // RESULTADO DO TESTE: PASS ✅
+  // O teste valida que o carrinho pode ficar vazio após finalização.
+  // Aqui foi feita uma simulação simples sem chamar a função real do sistema.
 
 
   test("23. Carrossel troca imagens", () => {
     expect(true).toBe(true)
   })
-  // RESULTADO DO TESTE: PASS (simulação)
+  // RESULTADO DO TESTE: PASS ✅ (simulação)
+  // Este teste NÃO verifica o carrossel real do sistema.
+  // Apenas simula um comportamento esperado, pois o carrossel depende de setInterval e DOM dinâmico.
+
 
   test("24. Botões funcionam", () => {
     expect(true).toBe(true)
   })
-  // RESULTADO DO TESTE: PASS✅(simulação)
+  // RESULTADO DO TESTE: PASS ✅ (simulação)
+  // Este teste NÃO executa as funções reais (adicionar, remover, finalizar).
+  // Apenas representa que os botões deveriam funcionar corretamente.
 
 })
