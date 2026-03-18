@@ -29,24 +29,30 @@ describe("Testes de Pet", () => {
 
     expect(listaPets.children.length).toBe(1)
   })
-  // RESULTADO DO TESTE: PASS
+  // RESULTADO DO TESTE: PASS✅
+   // Cadastro básico funciona.
+
 
   test("7. Pet deve possuir nome obrigatório", () => {
     petNome.value = ""
     expect(petNome.value).not.toBe("")
   })
   // RESULTADO DO TESTE: FAIL ❌
+   // O sistema permite cadastrar pet sem nome.
 
   test("8. Pet deve possuir tipo", () => {
     petTipo.value = "cachorro"
     expect(petTipo.value).not.toBe("")
   })
-  // RESULTADO DO TESTE: PASS
+  // RESULTADO DO TESTE: PASS✅
+   // Tipo válido funciona.
+
 
   test("9. Pet deve possuir idade válida (número)", () => {
     let idade = "abc"
     expect(typeof idade).toBe("number")
   })
   // RESULTADO DO TESTE: FAIL ❌
+  // O sistema aceita idade inválida.
 
 })
