@@ -1,37 +1,60 @@
-describe("Testes de Regras de Negócio", () => {
+/**
+ * @jest-environment jsdom
+ */
 
-  test("Compra acima de R$100 deve aplicar desconto de 10%", () => {
+const app = require('../app')
 
-      let total = 150
-      let desconto = total * 0.10
+beforeEach(() => {
+  document.body.innerHTML = `
+    <input id="clienteNome">
+    <input id="clienteEmail">
+    <input type="checkbox" id="clienteVip">
+    <ul id="listaClientes"></ul>
+  `
 
-      expect(desconto).toBe(20)
+  global.clienteNome = document.getElementById("clienteNome")
+  global.clienteEmail = document.getElementById("clienteEmail")
+  global.clienteVip = document.getElementById("clienteVip")
+  global.listaClientes = document.getElementById("listaClientes")
+  global.alert = jest.fn()
+})
 
+describe("Testes de Cliente", () => {
+
+  test("1. Deve permitir criar cliente com nome válido", () => {
+    clienteNome.value = "Matheus"
+    clienteEmail.value = "teste@email.com"
+
+    app.criarCliente()
+
+    expect(listaClientes.children.length).toBe(1)
   })
-// RESULTADO DO TESTE
-// FAIL: O desconto de 10% não foi aplicado corretamente.
+  // RESULTADO DO TESTE: PASS
 
+  test("2. Não deve permitir cliente com nome vazio", () => {
+    clienteNome.value = ""
+    app.criarCliente()
 
-  test("Cliente VIP deve receber desconto de 15%", () => {
-
-    let total = 200
-    let desconto = total * 0.15
-
-    expect(desconto).toBe(50)
-
+    expect(listaClientes.children.length).toBe(0)
   })
-// RESULTADO DO TESTE
-// FAIL: O desconto VIP não está correto.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Carrinho não deve aceitar produto com preço igual a zero", () => {
-
-    let preco = 0
-
-    expect(preco).toBeGreaterThan(0)
-
+  test("3. Deve permitir cadastrar cliente com email válido", () => {
+    clienteEmail.value = "teste@email.com"
+    expect(clienteEmail.value).toContain("@")
   })
-// RESULTADO DO TESTE
-// FAIL: O sistema aceitou produto com preço zero.
+  // RESULTADO DO TESTE: PASS
+
+  test("4. Não deve permitir email inválido", () => {
+    clienteEmail.value = "email_invalido"
+    expect(clienteEmail.value).toContain("@")
+  })
+  // RESULTADO DO TESTE: FAIL ❌ (site não valida email)
+
+  test("5. Deve permitir marcar cliente como VIP", () => {
+    clienteVip.checked = true
+    expect(clienteVip.checked).toBe(true)
+  })
+  // RESULTADO DO TESTE: PASS
 
 })

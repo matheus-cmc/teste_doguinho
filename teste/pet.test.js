@@ -1,46 +1,52 @@
+/**
+ * @jest-environment jsdom
+ */
+
+const app = require('../app')
+
+beforeEach(() => {
+  document.body.innerHTML = `
+    <input id="petNome">
+    <input id="petTipo">
+    <input id="petIdade">
+    <ul id="listaPets"></ul>
+  `
+
+  global.petNome = document.getElementById("petNome")
+  global.petTipo = document.getElementById("petTipo")
+  global.petIdade = document.getElementById("petIdade")
+  global.listaPets = document.getElementById("listaPets")
+})
+
 describe("Testes de Pet", () => {
 
-  test("Deve permitir cadastrar um pet", () => {
+  test("6. Deve permitir cadastrar um pet", () => {
+    petNome.value = "Rex"
+    petTipo.value = "cachorro"
+    petIdade.value = "5"
 
-      let pet = "Rex"
+    app.cadastrarPet()
 
-      expect(pet).not.toBe("")
-
+    expect(listaPets.children.length).toBe(1)
   })
-// RESULTADO DO TESTE
-// PASS: O sistema permitiu cadastrar um pet com nome válido.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Pet deve possuir nome obrigatório", () => {
-
-    let nomePet = ""
-
-    expect(nomePet).not.toBe("")
-
+  test("7. Pet deve possuir nome obrigatório", () => {
+    petNome.value = ""
+    expect(petNome.value).not.toBe("")
   })
-// RESULTADO DO TESTE
-// FAIL: O sistema aceitou cadastrar pet sem nome.
+  // RESULTADO DO TESTE: FAIL ❌
 
-
-  test("Pet deve possuir tipo (cachorro, gato, etc)", () => {
-
-    let tipo = "cachorro"
-
-    expect(tipo).not.toBe("")
-
+  test("8. Pet deve possuir tipo", () => {
+    petTipo.value = "cachorro"
+    expect(petTipo.value).not.toBe("")
   })
-// RESULTADO DO TESTE
-// PASS: O sistema permitiu definir o tipo do pet.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Pet deve possuir idade válida (número)", () => {
-
+  test("9. Pet deve possuir idade válida (número)", () => {
     let idade = "abc"
-
     expect(typeof idade).toBe("number")
-
   })
-// RESULTADO DO TESTE
-// FAIL: O sistema aceitou idade que não é número.
+  // RESULTADO DO TESTE: FAIL ❌
 
 })

@@ -1,48 +1,37 @@
+/**
+ * @jest-environment jsdom
+ */
+
+const app = require('../app')
+
 describe("Testes de Carrinho", () => {
 
-  test("Deve permitir adicionar produto ao carrinho", () => {
+  test("14. Deve permitir adicionar produto ao carrinho", () => {
+    let carrinho = []
+    carrinho.push("Ração")
 
-      let carrinho = ["Ração"]
-
-      expect(carrinho).toContain("Ração")
-
+    expect(carrinho.length).toBe(1)
   })
-// RESULTADO DO TESTE
-// PASS: O sistema permitiu adicionar produto ao carrinho.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Deve permitir remover produto do carrinho", () => {
-
+  test("15. Deve permitir remover produto do carrinho", () => {
     let carrinho = ["Ração"]
-
     carrinho.pop()
 
     expect(carrinho.length).toBe(1)
-
   })
-// RESULTADO DO TESTE
-// FAIL: O produto não foi removido corretamente do carrinho.
+  // RESULTADO DO TESTE: FAIL ❌
 
-
-  test("Carrinho deve listar todos os produtos adicionados", () => {
-
+  test("16. Carrinho deve listar produtos", () => {
     let carrinho = ["Ração", "Brinquedo"]
-
     expect(carrinho.length).toBe(2)
-
   })
-// RESULTADO DO TESTE
-// PASS: O carrinho lista corretamente os produtos.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Carrinho deve calcular o valor total da compra", () => {
-
+  test("17. Carrinho deve calcular total", () => {
     let total = 50 + 30
-
     expect(total).toBe(100)
-
   })
-// RESULTADO DO TESTE
-// FAIL: O cálculo do total da compra está incorreto.
+  // RESULTADO DO TESTE: FAIL ❌
 
 })

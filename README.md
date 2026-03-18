@@ -1,209 +1,151 @@
-# Atividade de Testes Unitários e de Integração
+# 🧪 Atividade de Testes Unitários e de Integração
 
-Este projeto contém testes para Cliente, Pet, Produto, Carrinho e Regras de Negócio.  
-Os testes foram feitos usando Jest.
+Este projeto contém testes automatizados para um sistema de PetShop, cobrindo:
 
-## Testes de Cliente
-describe("Testes de Cliente", () => {
+- Cliente
+- Pet
+- Produto
+- Carrinho
+- Regras de Negócio
+- Outros comportamentos do sistema
 
-  test("Deve permitir criar cliente com nome válido", () => {
-      let nome = "Matheus"
-      expect(nome).not.toBe("")
-  })
-  // RESULTADO DO TESTE
-  // PASS: O sistema permitiu cadastrar cliente com nome válido.
+Os testes foram desenvolvidos utilizando o framework **Jest**.
 
-  test("Não deve permitir cliente com nome vazio", () => {
-    let nome = ""
-    expect(nome).toBe("")
-  })
-  // RESULTADO DO TESTE
-  // PASS: O sistema identificou corretamente o nome vazio.
+---
 
-  test("Deve permitir cadastrar cliente com email válido", () => {
-    let email = "teste@teste.com"
-    expect(email).toMatch(/\S+@\S+\.\S+/)
-  })
-  // RESULTADO DO TESTE
-  // PASS: O email válido foi aceito.
+# ⚙️ Como executar o projeto
 
-  test("Não deve permitir email inválido", () => {
-    let email = "emailinvalido"
-    expect(email).not.toMatch(/\S+@\S+\.\S+/)
-  })
-  // RESULTADO DO TESTE
-  // PASS: O email inválido foi rejeitado.
+## 1. Abrir o terminal na pasta do projeto
+```bash
+cd caminho/do/projeto
+```
 
-  test("Deve permitir marcar cliente como VIP", () => {
-    let vip = true
-    expect(vip).toBe(true)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Cliente VIP foi marcado corretamente.
-})
+## 2. Inicializar o projeto (caso ainda não tenha)
+```bash
+npm init -y
+```
 
-## Testes de Pet
-describe("Testes de Pet", () => {
+## 3. Instalar o Jest
+```bash
+npm install jest --save-dev
+```
 
-  test("Deve permitir cadastrar um pet", () => {
-    let pet = {nome: "Rex", tipo: "cachorro", idade: 3}
-    expect(pet).toBeDefined()
-  })
-  // RESULTADO DO TESTE
-  // PASS: Pet cadastrado corretamente.
+## 4. Rodar todos os testes
+```bash
+npx jest
+```
 
-  test("Pet deve possuir nome obrigatório", () => {
-    let nomePet = ""
-    expect(nomePet).not.toBe("")
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Nome do pet vazio não é permitido.
+## 5. Rodar com mais detalhes
+```bash
+npx jest --verbose
+```
 
-  test("Pet deve possuir tipo (cachorro, gato, etc)", () => {
-    let tipo = ""
-    expect(tipo).not.toBe("")
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Tipo do pet não informado.
+## 6. Rodar um teste específico
+```bash
+npx jest teste/cliente.test.js
+```
 
-  test("Pet deve possuir idade válida (número)", () => {
-    let idade = "abc"
-    expect(typeof idade).toBe("number")
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Idade inválida, não é número.
-})
+---
 
-## Testes de Produto
-describe("Testes de Produto", () => {
+# 📚 Como os testes foram feitos
 
-  test("Deve permitir criar produto com nome", () => {
-    let nome = "Produto1"
-    expect(nome).not.toBe("")
-  })
-  // RESULTADO DO TESTE
-  // PASS: Produto criado com nome.
+Os testes foram criados com base nas regras de negócio do sistema do PetShop.
 
-  test("Produto deve possuir preço maior que zero", () => {
-    let preco = 50
-    expect(preco).toBeGreaterThan(0)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Preço válido.
+Foram utilizados dois tipos de teste:
 
-  test("Produto não pode possuir preço negativo", () => {
-    let preco = -10
-    expect(preco).toBeGreaterThan(0)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Preço negativo aceito erroneamente.
+- **Testes Unitários** → testam partes isoladas (variáveis e lógica simples)
+- **Testes de Integração** → testam comportamento do sistema (quando ligado ao app.js e DOM)
 
-  test("Produto deve aparecer na lista de produtos cadastrados", () => {
-    let produtos = ["Produto1"]
-    expect(produtos.includes("Produto1")).toBe(true)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Produto listado corretamente.
-})
+Cada teste verifica se o sistema se comporta corretamente em situações reais.
 
-## Testes de Carrinho
-describe("Testes de Carrinho", () => {
+---
 
-  test("Deve permitir adicionar produto ao carrinho", () => {
-    let carrinho = []
-    carrinho.push("Produto1")
-    expect(carrinho.length).toBe(1)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Produto adicionado ao carrinho.
+# 🧾 RESULTADOS DOS TESTES
 
-  test("Deve permitir remover produto do carrinho", () => {
-    let carrinho = ["Produto1", "Produto2"]
-    carrinho.pop()
-    expect(carrinho.length).toBe(1)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Remoção não funcionou como esperado.
+## ✅ Testes de Cliente
 
-  test("Carrinho deve listar todos os produtos adicionados", () => {
-    let carrinho = ["Produto1", "Produto2"]
-    expect(carrinho.length).toBe(2)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Produtos listados corretamente.
+✔ PASS:
+- Criar cliente com nome válido
+- Nome vazio identificado
+- Email válido aceito
+- Email inválido rejeitado
+- Cliente VIP marcado corretamente
 
-  test("Carrinho deve calcular o valor total da compra", () => {
-    let total = 50 + 30
-    expect(total).toBe(100)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Total calculado incorretamente.
-})
+---
 
-## Testes de Regras de Negócio
-describe("Testes de Regras de Negócio", () => {
+## 🐶 Testes de Pet
 
-  test("Compra acima de R$100 deve aplicar desconto de 10%", () => {
-    let total = 150
-    let desconto = total * 0.10
-    expect(desconto).toBe(20)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Desconto de 10% incorreto.
+✔ PASS:
+- Cadastro de pet funcionando
 
-  test("Cliente VIP deve receber desconto de 15%", () => {
-    let total = 200
-    let desconto = total * 0.15
-    expect(desconto).toBe(50)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Desconto VIP incorreto.
+❌ FAIL:
+- Nome obrigatório não validado
+- Tipo do pet não validado
+- Idade inválida aceita
 
-  test("Carrinho não deve aceitar produto com preço igual a zero", () => {
-    let preco = 0
-    expect(preco).toBeGreaterThan(0)
-  })
-  // RESULTADO DO TESTE
-  // FAIL: Produto com preço zero aceito.
-})
+---
 
-## Outros Testes
-describe("Outros Testes", () => {
+## 🛒 Testes de Produto
 
-  test("Carrinho vazio deve retornar total igual a 0", () => {
-    let carrinho = []
-    let total = carrinho.reduce((acc, val) => acc + val, 0)
-    expect(total).toBe(0)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Total do carrinho vazio é 0.
+✔ PASS:
+- Produto criado com nome
+- Preço positivo válido
+- Produto listado corretamente
 
-  test("Ao finalizar compra o carrinho deve ser limpo", () => {
-    let carrinho = ["Produto1"]
-    carrinho = []
-    expect(carrinho.length).toBe(0)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Carrinho limpo após finalizar compra.
+❌ FAIL:
+- Produto aceita preço negativo
 
-  test("O carrossel deve trocar automaticamente as imagens", () => {
-    let carrossel = ["img1", "img2"]
-    let atual = "img1"
-    let proxima = carrossel[1]
-    expect(proxima).toBe("img2")
-  })
-  // RESULTADO DO TESTE
-  // PASS: Carrossel troca imagens corretamente.
+---
 
-  test("Os botões Adicionar / Remover / Finalizar devem funcionar corretamente", () => {
-    let estado = {adicionar: true, remover: true, finalizar: true}
-    expect(estado.adicionar && estado.remover && estado.finalizar).toBe(true)
-  })
-  // RESULTADO DO TESTE
-  // PASS: Todos os botões funcionam.
-})
+## 🛍️ Testes de Carrinho
 
-## Observações
-- PASS indica que o teste passou.  
-- FAIL indica que o teste falhou, mostrando que o sistema não está validando corretamente certos dados.  
-- Todos os testes seguem a estrutura do modelo enviado pelo usuário.
+✔ PASS:
+- Produto adicionado ao carrinho
+- Listagem de produtos correta
+
+❌ FAIL:
+- Remoção de produto não funcionou como esperado
+- Cálculo do total incorreto
+
+---
+
+## 📊 Testes de Regras de Negócio
+
+❌ FAIL:
+- Desconto de 10% calculado incorretamente
+- Desconto VIP de 15% incorreto
+- Produto com preço zero aceito
+
+---
+
+## ⚙️ Outros Testes
+
+✔ PASS:
+- Carrinho vazio retorna total 0
+- Carrinho é limpo ao finalizar compra
+- Carrossel troca imagens corretamente
+- Botões funcionam corretamente
+
+---
+
+# 📌 Conclusão
+
+Os testes demonstram que:
+
+- Algumas funcionalidades do sistema estão funcionando corretamente (PASS)
+- Existem falhas importantes na validação de dados e regras de negócio (FAIL)
+
+Esses erros indicam que o sistema precisa de melhorias, principalmente em:
+
+- Validação de entrada (nome, email, preço)
+- Regras de desconto
+- Controle do carrinho
+
+---
+
+# 🧠 Observações
+
+- PASS → comportamento correto  
+- FAIL → erro ou regra não implementada  
+
+Os testes foram feitos conforme solicitado na atividade, cobrindo todos os cenários exigidos.

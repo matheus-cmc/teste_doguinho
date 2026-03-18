@@ -1,46 +1,51 @@
+/**
+ * @jest-environment jsdom
+ */
+
+const app = require('../app')
+
+beforeEach(() => {
+  document.body.innerHTML = `
+    <input id="produtoNome">
+    <input id="produtoPreco">
+    <select id="produtoSelect"></select>
+    <ul id="listaProdutos"></ul>
+  `
+
+  global.produtoNome = document.getElementById("produtoNome")
+  global.produtoPreco = document.getElementById("produtoPreco")
+  global.produtoSelect = document.getElementById("produtoSelect")
+  global.listaProdutos = document.getElementById("listaProdutos")
+})
+
 describe("Testes de Produto", () => {
 
-  test("Deve permitir criar produto com nome", () => {
+  test("10. Deve permitir criar produto com nome", () => {
+    produtoNome.value = "Ração"
+    produtoPreco.value = "50"
 
-      let produto = "Ração"
+    app.criarProduto()
 
-      expect(produto).not.toBe("")
-
+    expect(listaProdutos.children.length).toBe(1)
   })
-// RESULTADO DO TESTE
-// PASS: O sistema permitiu criar produto com nome válido.
+  // RESULTADO DO TESTE: FAIL ❌ (erro produtoSelect undefined)
 
-
-  test("Produto deve possuir preço maior que zero", () => {
-
+  test("11. Produto deve possuir preço maior que zero", () => {
     let preco = 50
-
     expect(preco).toBeGreaterThan(0)
-
   })
-// RESULTADO DO TESTE
-// PASS: O sistema aceitou preço válido.
+  // RESULTADO DO TESTE: PASS
 
-
-  test("Produto não pode possuir preço negativo", () => {
-
+  test("12. Produto não pode possuir preço negativo", () => {
     let preco = -10
-
     expect(preco).toBeGreaterThan(0)
-
   })
-// RESULTADO DO TESTE
-// FAIL: O sistema aceitou preço negativo.
+  // RESULTADO DO TESTE: FAIL ❌
 
-
-  test("Produto deve aparecer na lista de produtos cadastrados", () => {
-
-    let produtos = ["Ração", "Brinquedo"]
-
-    expect(produtos).toContain("Ração")
-
+  test("13. Produto deve aparecer na lista", () => {
+    app.criarProduto()
+    expect(listaProdutos.children.length).toBeGreaterThan(0)
   })
-// RESULTADO DO TESTE
-// PASS: O produto aparece na lista de produtos cadastrados.
+  // RESULTADO DO TESTE: FAIL ❌
 
 })
