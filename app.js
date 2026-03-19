@@ -211,11 +211,11 @@ setInterval(nextSlide,4000)
 
 
 module.exports = {
-criarCliente,
-cadastrarPet,
-criarProduto,
-adicionarCarrinho,
-removerCarrinho,
-calcularTotal,
-finalizarCompra
+  carrinho,
+  produtos,
+  adicionarCarrinho,
+  removerCarrinho,
+  renderCarrinho,
+  calcularTotal,
+  criarProduto
 }

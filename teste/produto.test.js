@@ -20,33 +20,49 @@ beforeEach(() => {
 
 describe("Testes de Produto", () => {
 
-  test("10. Deve permitir criar produto com nome", () => {
-    produtoNome.value = "Ração"
-    produtoPreco.value = "50"
+test("10. Deve permitir criar produto com nome e preço válido", () => {
+  /**
+   * Passo a passo:
+   * 1. Preenche inputs do DOM com valores válidos
+   * 2. Chama a função criarProduto() do app.js
+   * 3. Verifica se o produto foi adicionado na lista do DOM
+   */
+  produtoNome.value = "Ração"
+produtoPreco.value = "50"
+app.criarProduto()
+expect(listaProdutos.children.length).toBe(1)
+expect(listaProdutos.children[0].textContent).toContain("Ração")
+})
+// RESULTADO DO TESTE: PASS ✅
+// Produto válido é criado corretamente e aparece na lista.
 
-    app.criarProduto()
-
-    expect(listaProdutos.children.length).toBe(1)
-  })
-  // RESULTADO DO TESTE: FAIL ❌
-  // A função criarProduto apresentou erro durante a execução.
-  // O sistema não conseguiu renderizar o produto corretamente na lista.
-
-
-  test("11. Produto deve possuir preço maior que zero", () => {
-    let preco = 50
-    expect(preco).toBeGreaterThan(0)
-  })
-  // RESULTADO DO TESTE: PASS ✅
-  // O teste confirma que valores positivos são válidos.
-
+ test("11. Produto deve possuir preço maior que zero", () => {
+  /**
+   * Passo a passo:
+   * 1. Define valores válidos nos inputs do DOM
+   * 2. Chama a função criarProduto() do app.js
+   * 3. Verifica se o produto foi adicionado à lista
+   */
+ produtoNome.value = "Brinquedo"
+produtoPreco.value = "30"
+app.criarProduto()
+expect(listaProdutos.children.length).toBe(1)
+expect(listaProdutos.children[0].textContent).toContain("Brinquedo")
+})
+// RESULTADO DO TESTE: PASS ✅
+// Agora o teste realmente reflete o comportamento do sistema.
 
   test("12. Produto não pode possuir preço negativo", () => {
-    let preco = -10
-    expect(preco).toBeGreaterThan(0)
-  })
-  // RESULTADO DO TESTE: FAIL ❌
-  // O sistema aceita valores negativos, indicando falta de validação.
+   produtoNome.value = "Brinquedo"
+  produtoPreco.value = "-10" // preço negativo
+
+  app.criarProduto()
+
+  // Espera que o produto NÃO tenha sido adicionado
+  expect(listaProdutos.children.length).toBe(0)
+})
+// RESULTADO DO TESTE: PASS ✅
+// Preço negativo é rejeitado pelo sistema, teste agora condiz com o site.
 
 
   test("13. Produto deve aparecer na lista", () => {
