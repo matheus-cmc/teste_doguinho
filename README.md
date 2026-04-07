@@ -107,7 +107,7 @@ Cada teste verifica se o sistema se comporta corretamente em situações reais.
 - Remoção de produto não funcionou como esperado
 - Cálculo do total incorreto
 
----
+---.
 
 ## 📊 Testes de Regras de Negócio
 
